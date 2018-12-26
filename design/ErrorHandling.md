@@ -21,7 +21,7 @@ There are several types of WebGPU calls that get their errors handled differentl
 ## *Debugging*: Dev Tools
 
 Implementations should provide a way to enable synchronous validation, for example via a debug shim or via the developer tools.
-The extra CPU overhead should be acceptable for debugging purposes.
+The extra overhead needs to be low enough that applications can still run while being debugged.
 
 ## *Telemetry* \& *Fallback*: Error Logging
 
@@ -59,7 +59,7 @@ partial interface WebGPUDevice {
  - `"device-lost"`: the `WebGPUDevice` cannot be used anymore.
    This may happen if the device is destroyed by the application, reclaimed by the browser, or something goes terribly wrong.
    (An application may request a new device, or choose to fallback to other content.)
- - `"out-of-memory": an allocation failed because too much memory was used by the application (CPU or GPU).
+ - `"out-of-memory"`: an allocation failed because too much memory was used by the application (CPU or GPU).
    This includes recoverable out of memory errors that aren't opt-ed in to be handled by the application when the resource was created.
 
 For creation errors, the `object` attribute holds the object handle that was created.
@@ -140,10 +140,10 @@ A concrete example: When creating a buffer, the following logic applies:
  - `createBuffer` returns a `WebGPUBuffer` object `buffer` immediately.
  - A `WebGPUObjectStatusQuery` can be obtained by calling `device.getObjectStatus(buffer)`.
    At a later time, that query resolves to a `WebGPUObjectStatus` that is one of:
-       - Creation succeeded (`"valid"`).
-       - Creation encountered a recoverable error (`"out-of-memory"`).
-         (The application can then choose to retry a smaller allocation of a *new* `WebGPUBuffer`.)
-       - Creation encountered another type of error out of the control of the application (`"invalid"`).
+    - Creation succeeded (`"valid"`).
+    - Creation encountered a recoverable error (`"out-of-memory"`).
+      (The application can then choose to retry a smaller allocation of a *new* `WebGPUBuffer`.)
+    - Creation encountered another type of error out of the control of the application (`"invalid"`).
 
 Regardless of any recovery efforts the application makes, if creation fails,
 the resulting object is invalid (and subject to error propagation).
