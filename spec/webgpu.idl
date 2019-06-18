@@ -1,24 +1,16 @@
-<pre class='metadata'>
-Title: WebGPU
-Shortname: webgpu
-Level: 1
-Status: w3c/ED
-Group: webgpu
-URL: https://github.com/gpuweb/gpuweb/spec/
-Editor: The GPU for the Web Community Group, W3C https://github.com/gpuweb/
-Abstract: WebGPU exposes an API for performing operations, such as rendering and computation, on a Graphics Processing Unit.
-</pre>
+// Copyright (C) [2019] World Wide Web Consortium,
+// (Massachusetts Institute of Technology, European Research Consortium for
+// Informatics and Mathematics, Keio University, Beihang).
+// All Rights Reserved.
+//
+// This work is distributed under the W3C (R) Software License [1] in the hope
+// that it will be useful, but WITHOUT ANY WARRANTY; without even the implied
+// warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+//
+// [1] http://www.w3.org/Consortium/Legal/copyright-software
 
-Introduction {#intro}
-=====================
+// **** This file is auto-generated. Do not edit. ****
 
-This specification rocks.
-
-
-Type Definitions {#typedefs}
-============================
-
-<script type=idl>
 typedef long i32;
 typedef unsigned long u32;
 typedef unsigned long long u64;
@@ -56,12 +48,8 @@ interface mixin GPUObjectBase {
 dictionary GPUObjectDescriptorBase {
     DOMString? label;
 };
-</script>
 
-Buffers {#buffers}
-==================
 
-<script type=idl>
 typedef u32 GPUBufferUsageFlags;
 
 interface GPUBufferUsage {
@@ -88,12 +76,8 @@ interface GPUBuffer : GPUObjectBase {
 
     void destroy();
 };
-</script>
 
-Textures {#textures}
-====================
 
-<script type=idl>
 enum GPUTextureDimension {
     "1d",
     "2d",
@@ -231,12 +215,8 @@ interface GPUTexture : GPUObjectBase {
 
     void destroy();
 };
-</script>
 
-Samplers {#samplers}
-====================
 
-<script type=idl>
 enum GPUAddressMode {
     "clamp-to-edge",
     "repeat",
@@ -273,12 +253,8 @@ dictionary GPUSamplerDescriptor : GPUObjectDescriptorBase {
 
 interface GPUSampler : GPUObjectBase {
 };
-</script>
 
-Binding and Layout {#binding}
-=============================
 
-<script type=idl>
 typedef u32 GPUShaderStageFlags;
 
 interface GPUShaderStageBit {
@@ -338,12 +314,8 @@ dictionary GPUBindGroupDescriptor : GPUObjectDescriptorBase {
 
 interface GPUBindGroup : GPUObjectBase {
 };
-</script>
 
-Shader Module {#shader}
-=======================
 
-<script type=idl>
 // Note: While the choice of shader language is undecided,
 // GPUShaderModuleDescriptor will temporarily accept both
 // text and binary input.
@@ -355,12 +327,8 @@ dictionary GPUShaderModuleDescriptor : GPUObjectDescriptorBase {
 
 interface GPUShaderModule : GPUObjectBase {
 };
-</script>
 
-Pipeline Creation {#pipeline-creation}
-======================================
 
-<script type=idl>
 // RasterizationState
 enum GPUFrontFace {
     "ccw",
@@ -538,12 +506,8 @@ dictionary GPUVertexInputDescriptor {
     GPUIndexFormat indexFormat = "uint32";
     required sequence<GPUVertexBufferDescriptor?> vertexBuffers;
 };
-</script>
 
-Pipeline Descriptors {#pipeline-descriptors}
-============================================
 
-<script type=idl>
 dictionary GPUPipelineStageDescriptor {
     required GPUShaderModule module;
     required DOMString entryPoint;
@@ -553,24 +517,16 @@ dictionary GPUPipelineStageDescriptor {
 dictionary GPUPipelineDescriptorBase : GPUObjectDescriptorBase {
     required GPUPipelineLayout layout;
 };
-</script>
 
-Compute Pipeline {#compute-pipeline}
-===========================
 
-<script type=idl>
 dictionary GPUComputePipelineDescriptor : GPUPipelineDescriptorBase {
     required GPUPipelineStageDescriptor computeStage;
 };
 
 interface GPUComputePipeline : GPUObjectBase {
 };
-</script>
 
-Render Pipeline {#render-pipeline}
-==================================
 
-<script type=idl>
 enum GPUPrimitiveTopology {
     "point-list",
     "line-list",
@@ -598,12 +554,8 @@ dictionary GPURenderPipelineDescriptor : GPUPipelineDescriptorBase {
 
 interface GPURenderPipeline : GPUObjectBase {
 };
-</script>
 
-Command Recording {#command-recording}
-======================================
 
-<script type=idl>
 interface GPUProgrammablePassEncoder : GPUObjectBase {
     void endPass();
 
@@ -752,12 +704,8 @@ interface GPUCommandEncoder : GPUObjectBase {
 dictionary GPUCommandEncoderDescriptor : GPUObjectDescriptorBase {
     //TODO: reusability flag?
 };
-</script>
 
-Fences {#fences}
-================
 
-<script type=idl>
 dictionary GPUFenceDescriptor : GPUObjectDescriptorBase {
     u64 initialValue = 0;
 };
@@ -766,24 +714,16 @@ interface GPUFence : GPUObjectBase {
     u64 getCompletedValue();
     Promise<void> onCompletion(u64 completionValue);
 };
-</script>
 
-Queues {#queues}
-================
 
-<script type=idl>
 interface GPUQueue : GPUObjectBase {
     void submit(sequence<GPUCommandBuffer> buffers);
 
     GPUFence createFence(optional GPUFenceDescriptor descriptor);
     void signal(GPUFence fence, u64 signalValue);
 };
-</script>
 
-Canvas Rendering and Swap Chain {#swapchain}
-============================================
 
-<script type=idl>
 interface GPUCanvasContext {
     // Calling configureSwapChain a second time invalidates the previous one,
     // and all of the textures it’s produced.
@@ -801,12 +741,8 @@ dictionary GPUSwapChainDescriptor : GPUObjectDescriptorBase {
 interface GPUSwapChain : GPUObjectBase {
     GPUTexture getCurrentTexture();
 };
-</script>
 
-Device {#device}
-================
 
-<script type=idl>
 dictionary GPUExtensions {
     boolean anisotropicFiltering = false;
 };
@@ -883,12 +819,8 @@ partial interface Navigator {
 partial interface WorkerNavigator {
     [SameObject] readonly attribute GPU gpu;
 };
-</script>
 
-Fatal Errors {#fatal}
-=====================
 
-<script type=idl>
 interface GPUDeviceLostInfo {
     readonly attribute DOMString message;
 };
@@ -896,12 +828,8 @@ interface GPUDeviceLostInfo {
 partial interface GPUDevice {
     readonly attribute Promise<GPUDeviceLostInfo> lost;
 };
-</script>
 
-Error Scopes {#errors}
-======================
 
-<script type=idl>
 enum GPUErrorFilter {
     "none",
     "out-of-memory",
@@ -926,12 +854,8 @@ partial interface GPUDevice {
     void pushErrorScope(GPUErrorFilter filter);
     Promise<GPUError?> popErrorScope();
 };
-</script>
 
-Telemetry {#telemetry}
-======================
 
-<script type=idl>
 [
     Constructor(DOMString type, GPUUncapturedErrorEventInit gpuUncapturedErrorEventInitDict),
     Exposed=Window
@@ -948,4 +872,3 @@ partial interface GPUDevice {
     [Exposed=Window]
     attribute EventHandler onuncapturederror;
 };
-</script>
