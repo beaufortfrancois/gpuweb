@@ -1,5 +1,7 @@
 # W3C _GPU for the Web_ Community Group
 
+TEST
+
 This is the repository for the W3C's [GPU for the Web](https://www.w3.org/community/gpu/)
 Community Group.
 
