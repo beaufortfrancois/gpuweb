@@ -1759,7 +1759,8 @@ A <dfn dfn>supported limits</dfn> object has a value for every limit defined by 
         <td>{{GPUSize32}} <td>[=limit class/maximum=] <td>65535
     <tr class=row-continuation><td colspan=4>
         The maximum value for the arguments of
-        {{GPUComputePassEncoder/dispatchWorkgroups(workgroupCountX, workgroupCountY, workgroupCountZ)}}.
+        {{GPUComputePassEncoder/dispatchWorkgroups(workgroupCountX, workgroupCountY, workgroupCountZ)}} and
+        {{GPUComputePassEncoder/dispatchWorkgroupsIndirect(indirectBuffer, indirectOffset)}}.
 </table>
 
 <h5 id=gpusupportedlimits data-dfn-type=interface>`GPUSupportedLimits`
